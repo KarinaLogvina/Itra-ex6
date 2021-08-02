@@ -1,9 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router";
 import * as Yup from "yup";
 import "./signUp.css";
 import axios from "axios";
 
 const SignUp = () => {
+    let history = useHistory();
     const initialValues = {
         username: "",
         mail: "",
@@ -18,7 +21,7 @@ const SignUp = () => {
 
     const onSubmit = (data) => {
         axios.post("http://localhost:3002/registration", data).then(() => {
-            console.log(data);
+            history.push('/login');
         })
     }
 
@@ -36,7 +39,7 @@ const SignUp = () => {
                                 <p>Enter your information to register</p>
                             </div>
                             <div className="text-center mb-5">
-                                <p>Already have an account? <span className="font-bold text-indigo-500">Sign In</span></p>
+                                <p>Already have an account? <Link to="/login" className="font-bold text-indigo-500" >Sign In</Link></p>
                             </div>
                             <Form>
                                 <div>
@@ -47,7 +50,7 @@ const SignUp = () => {
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
                                                 <Field name="username" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Tiiksi" />
                                             </div>
-                                            <ErrorMessage name="username" component="span" />
+                                            <ErrorMessage className="error" name="username" component="span" />
                                         </div>
                                     </div>
                                     <div className="flex -mx-3">
@@ -57,7 +60,7 @@ const SignUp = () => {
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-email-outline text-gray-400 text-lg"></i></div>
                                                 <Field name="mail" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="johnsmith@example.com" />
                                             </div>
-                                            <ErrorMessage name="mail" component="span" />
+                                            <ErrorMessage className="error" name="mail" component="span" />
                                         </div>
                                     </div>
                                     <div className="flex -mx-3">
@@ -67,7 +70,7 @@ const SignUp = () => {
                                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-lock-outline text-gray-400 text-lg"></i></div>
                                                 <Field name="password" type="password" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="************" />
                                             </div>
-                                            <ErrorMessage name="password" component="span" />
+                                            <ErrorMessage className="error" name="password" component="span" />
                                         </div>
                                     </div>
                                     <div className="flex -mx-3">

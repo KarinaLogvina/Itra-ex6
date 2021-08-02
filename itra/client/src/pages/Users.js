@@ -4,12 +4,13 @@ import Main from '../components/Main/Main';
 
 
 function Users() {
-
     const [listOfUsers, setListOfUsers] = useState([]);
+
     useEffect(() => {
-        axios.get("http://localhost:3000/users").then((response) => {
+        axios.get("http://localhost:3002/users").then((response) => {
+            console.log(response.data)
             setListOfUsers(response.data);
-        });
+        }).catch((error) => console.log(error));
     }, [])
 
     return (
